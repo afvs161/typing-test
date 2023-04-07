@@ -4,9 +4,9 @@ const form = document.querySelector("#form"),
 	caret = document.querySelector("#caret"),
 	restart = document.querySelector("#restart")
 
-let text =
-	"is was are be have had were can said use do will would make like has look write go see could been call am find did get come made may take know live give think say help tell follow came want show set put does must ask went read need move try change play spell found study learn should add keep start thought saw turn might close seem open begin got run walk began grow took carry hear stop miss eat watch let cut talk being	leave"
-// let text = "lorem ipsum dolor sit amet"
+// let text =
+// 	"is was are be have had were can said use do will would make like has look write go see could been call am find did get come made may take know live give think say help tell follow came want show set put does must ask went read need move try change play spell found study learn should add keep start thought saw turn might close seem open begin got run walk began grow took carry hear stop miss eat watch let cut talk being	leave"
+let text = "lorem ipsum dolor sit amet"
 let textArr = text.split(" ")
 let i = 0
 let caretP = 0
@@ -43,20 +43,6 @@ for (let j = 0; j < textArr.length; j++) {
 }
 
 input.addEventListener("input", (e) => {
-	// caret: remove blinking, move
-	caret.classList.remove("blink")
-
-	let char = spans[i].firstChild.childNodes[e.target.value.length - 1]
-	if (char) {
-		console.log(char.offsetWidth)
-		if (e.target.value.length == spans[i].firstChild.childNodes.length) {
-			caretP += char.offsetWidth + 5
-		} else {
-			caretP += char.offsetWidth
-		}
-		caret.style.left = caretP + "px"
-	}
-
 	// spell check after each character
 	if (e.target.value.length <= textArr[i].length) {
 		if (e.target.value == textArr[i].slice(0, e.target.value.length)) {
@@ -95,6 +81,17 @@ input.addEventListener("input", (e) => {
 		// restart
 		if (i == textArr.length) {
 			restart.focus()
+		}
+	}
+
+	// caret: remove blinking, move
+	caret.classList.remove("blink")
+	if (spans[i]) {
+		let char = spans[i].firstChild.childNodes[e.target.value.length - 1]
+		if (char) {
+			console.log(char.offsetWidth)
+			caretP += char.offsetWidth
+			caret.style.left = caretP + "px"
 		}
 	}
 })

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Typing Test</title>
+		<style>
+			#wordDisplay {
+				position: relative;
+				white-space: pre-wrap;
+				overflow: visible;
+			}
+
+			.caret {
+				position: absolute;
+				animation: blink 1s steps(2, start) infinite;
+			}
+
+			@keyframes blink {
+				to {
+					visibility: hidden;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Typing Test</h1>
+		<p>Type the following words:</p>
+		<p id="wordDisplay"></p>
+		<input type="text" autofocus />
+		<script>
+			let words = [
+				"The",
+				"quick",
+				"brown",
+				"fox",
+				"jumps",
+				"over",
+				"the",
+				"lazy",
+				"dog",
+			]
+			let wordIndex = 0
+			let startTime = Date.now()
+
+			let wordDisplay = document.querySelector("#wordDisplay")
+			let input = document.querySelector("input")
+			let caret = document.createElement("span")
+			caret.classList.add("caret")
+			caret.textContent = "|"
+			wordDisplay.append(caret)
+
+			function updateWordDisplay() {
+				let beforeWords = words.slice(0, wordIndex).join(" ")
+				let currentWord = words[wordIndex]
+				let afterWords = words.slice(wordIndex + 1).join(" ")
+				let textNode = document.createTextNode(
+					`${beforeWords} ${currentWord} ${afterWords}`
+				)
+				wordDisplay.replaceChild(textNode, wordDisplay.firstChild)
+
+				let range = document.createRange()
+				range.setStart(textNode, beforeWords.length + input.value.length + 1)
+				range.setEnd(textNode, beforeWords.length + input.value.length + 1)
+				let rect = range.getBoundingClientRect()
+				caret.style.left = `${rect.left}px`
+				caret.style.top = `${rect.top}px`
+			}
+
+			updateWordDisplay()
+
+			input.addEventListener("input", (event) => {
+				if (input.value.trim() === words[wordIndex]) {
+					wordIndex++
+					input.value = ""
+					if (wordIndex >= words.length) {
+						let endTime = Date.now()
+						let timeTaken = (endTime - startTime) / 1000
+						let wpm = Math.round((words.length / timeTaken) * 60)
+						alert(
+							`You finished in ${timeTaken} seconds with a speed of ${wpm} WPM!`
+						)
+					} else {
+						updateWordDisplay()
+					}
+				} else {
+					updateWordDisplay()
+				}
+			})
+		</script>
+	</body>
+</html>
