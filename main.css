@@ -1,0 +1,111 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.con {
+	width: 100vw;
+	height: 100vh;
+	background-color: #323437;
+	padding: 50px;
+	text-align: center;
+	font-family: sans-serif;
+}
+
+.text {
+	width: 70vw;
+	text-align: left;
+	font-size: 2rem;
+	margin: 0 auto;
+	color: #646669;
+	position: relative;
+	word-break: break-all;
+}
+
+.spanM {
+	margin-right: 5px;
+}
+
+.cursor {
+	width: 2px;
+	height: 2rem;
+	background-color: #e2b714;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.input {
+	font-size: 2rem;
+	padding: 2px;
+	margin-top: 50px;
+	text-align: center;
+	border-radius: 4px;
+	outline: none;
+	border: none;
+}
+
+.restart {
+	font-size: 2rem;
+	text-decoration: none;
+	color: #d1d0c5;
+	margin-left: 20px;
+	background-color: rgba(0, 0, 0, 0.2);
+	border: 2px solid rgba(255, 255, 255, 0.2);
+	border-radius: 10px;
+	padding: 5px 10px;
+	position: relative;
+}
+
+.restart:hover .hover {
+	opacity: 1;
+}
+
+.restart:focus .hover {
+	opacity: 1;
+}
+
+.hover {
+	position: absolute;
+	top: -35px;
+	left: 42%;
+	transform: translate(-50%);
+	opacity: 0;
+	font-size: 1rem;
+	transition: all 0.1s;
+	border: 2px solid rgba(255, 255, 255, 0.2);
+	padding: 2px 6px;
+}
+
+/*  */
+.word {
+	color: #d1d0c5;
+}
+
+.right {
+	color: #646669;
+}
+
+.error {
+	color: #ca4754;
+}
+
+.blink {
+	animation-name: blink;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+@keyframes blink {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
